@@ -56,6 +56,9 @@ Currently, the Suite can only be compiled by the [LLVM from PLCT](https://github
 
 ### Compile using  clang for RISCV Vector Version
 
+To compile with gcc directly, export GCC_RISCV with the path to the parent directory of the GCC riscv compiler toolchain (so $GCC_RISCV/bin/* contains the toolchain binaries).
+To run the applications, export QEMU with the full path to the QEMU binary you want to use, and run `make runqemu` in the application directory.
+
 We provide precompiled binaries found in the folder bin.
 
 To compile any application you first enter in the subfolder and run the command make followed by the application name
