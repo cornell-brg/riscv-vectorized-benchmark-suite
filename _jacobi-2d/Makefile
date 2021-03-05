@@ -5,16 +5,16 @@ start:
 	rm bin/*.*
 	
 serial:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++  -Wall -flax-vector-conversions  -O2 -c -o src/jacobi-2d.o src/jacobi-2d.cpp; \
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++  -Wall -flax-vector-conversions   -march=rv64g -O2 -o bin/jacobi-2d_serial.exe src/*.o -lm; \
+	riscv64-unknown-elf-g++  -Wall -flax-vector-conversions  -O2 -c -o src/jacobi-2d.o src/jacobi-2d.cpp; \
+	riscv64-unknown-elf-g++  -Wall -flax-vector-conversions   -march=rv64g -O2 -o bin/jacobi-2d_serial.exe src/*.o -lm; \
 	rm src/*.o; \
-	${GCC_RISCV}/bin/riscv64-unknown-elf-objdump  -dC -ds  bin/jacobi-2d_serial.exe > bin/jacobi-2d_serial.dump
+	riscv64-unknown-elf-objdump  -dC -ds  bin/jacobi-2d_serial.exe > bin/jacobi-2d_serial.dump
 
 vector:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++  -Wall -flax-vector-conversions  -march=rv64g -O2 -c -o  src/jacobi-2d.o src/jacobi-2d.cpp; \
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++  -Wall -flax-vector-conversions  -march=rv64g -O2 -o bin/jacobi-2d_vector.exe src/*.o -lm ; \
+	riscv64-unknown-elf-g++  -Wall -flax-vector-conversions  -march=rv64g -O2 -c -o  src/jacobi-2d.o src/jacobi-2d.cpp; \
+	riscv64-unknown-elf-g++  -Wall -flax-vector-conversions  -march=rv64g -O2 -o bin/jacobi-2d_vector.exe src/*.o -lm ; \
 	rm src/*.o ; \
-	${GCC_RISCV}/bin/riscv64-unknown-elf-objdump  -dC -ds   bin/jacobi-2d_vector.exe > bin/jacobi-2d_vector.dump ; \
+	riscv64-unknown-elf-objdump  -dC -ds   bin/jacobi-2d_vector.exe > bin/jacobi-2d_vector.dump ; \
 
 host:
 	g++ -O2 -g -Wall -flax-vector-conversions -std=c99 -o -c src/jacobi-2d.o  src/jacobi-2d.cpp ; \

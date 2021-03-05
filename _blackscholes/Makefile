@@ -6,13 +6,15 @@ LLVM := /llvm/build/
 SPIKE := spike
 PK := pk
 
+QEMU := qemu-riscv64
+
 target = bin/rvv-test
 
 serial:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++     -O2 -o $(target) src/blackscholes.cpp -lm
+	riscv64-unknown-elf-g++     -O2 -o $(target) src/blackscholes.cpp -lm
 
 vector:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++        -O2 -o $(target)  src/blackscholes.cpp -lm
+	riscv64-unknown-elf-g++        -O2 -o $(target)  src/blackscholes.cpp -lm
 
 runspike :
 	$(SPIKE) --isa=rv64gcv $(PK) $(target) 1 ./input/in_64K.input prices.txt

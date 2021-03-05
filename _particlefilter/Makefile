@@ -6,6 +6,8 @@ LLVM := /llvm/build/
 SPIKE := spike
 PK := pk
 
+QEMU := qemu-riscv64
+
 target = bin/rvv-test
 
 start:
@@ -13,13 +15,13 @@ start:
 	rm bin/*.*
 
 serial:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions     -c  -O2 -o src/particlefilter_serial.o src/particlefilter.c
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions      -O2 -o $(target) src/particlefilter_serial.o -lm
+	riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions     -c  -O2 -o src/particlefilter_serial.o src/particlefilter.c
+	riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions      -O2 -o $(target) src/particlefilter_serial.o -lm
 	rm src/*.o
 
 vector:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions  -DMVL_$$mvl  -c     -O2 -o  src/particlefilter.o src/particlefilter.c ; \
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions  -DMVL_$$mvl     -O2 -o $(target) src/*.o -lm ; \
+	riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions  -DMVL_$$mvl  -c     -O2 -o  src/particlefilter.o src/particlefilter.c ; \
+	riscv64-unknown-elf-gcc  -Wall -flax-vector-conversions  -DMVL_$$mvl     -O2 -o $(target) src/*.o -lm ; \
 	rm src/*.o 
 
 runspike :

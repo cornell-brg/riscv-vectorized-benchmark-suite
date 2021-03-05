@@ -6,15 +6,17 @@ LLVM := /llvm/build/
 SPIKE := spike
 PK := pk
 
+QEMU := qemu-riscv64
+
 target = bin/rvv-test
 
 serial:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++     -O2 -o $(target) src/streamcluster.cpp -lm
-	${GCC_RISCV}/bin/riscv64-unknown-elf-objdump -D ./bin/rvv-test > ./bin/dump_serial
+	riscv64-unknown-elf-g++     -O2 -o $(target) src/streamcluster.cpp -lm
+	riscv64-unknown-elf-objdump -D ./bin/rvv-test > ./bin/dump_serial
 
 vector:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++        -O2 -o $(target)  src/streamcluster.cpp -lm
-	${GCC_RISCV}/bin/riscv64-unknown-elf-objdump -D ./bin/rvv-test > ./bin/dump_vector
+	riscv64-unknown-elf-g++        -O2 -o $(target)  src/streamcluster.cpp -lm
+	riscv64-unknown-elf-objdump -D ./bin/rvv-test > ./bin/dump_vector
 
 runspike :
 	echo >output.txt; \

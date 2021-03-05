@@ -6,6 +6,8 @@ LLVM := /llvm/build/
 SPIKE := spike
 PK := pk
 
+QEMU := qemu-riscv64
+
 target = bin/rvv-test
 
 start:
@@ -14,18 +16,18 @@ start:
 
 serial:
 	for entry in src/*.cpp ; do \
-		${GCC_RISCV}/bin/riscv64-unknown-elf-g++  -Wall -flax-vector-conversions    -c   -O2 -o   $$entry.o  $$entry ; \
+		riscv64-unknown-elf-g++  -Wall -flax-vector-conversions    -c   -O2 -o   $$entry.o  $$entry ; \
 	done
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++ -Wall -flax-vector-conversions      -O2  -o $(target) src/*.cpp.o -lm
+	riscv64-unknown-elf-g++ -Wall -flax-vector-conversions      -O2  -o $(target) src/*.cpp.o -lm
 	rm src/*.o
 
 vector:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c    -O2 -o  src/annealer_thread.o src/annealer_thread.cpp
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/main.o src/main.cpp
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/netlist.o src/netlist.cpp
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/netlist_elem.o src/netlist_elem.cpp
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/rng.o src/rng.cpp
-	${GCC_RISCV}/bin/riscv64-unknown-elf-g++ -Wall -flax-vector-conversions     -O2  -o bin/canneal_vector.exe src/*.o -lm
+	riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c    -O2 -o  src/annealer_thread.o src/annealer_thread.cpp
+	riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/main.o src/main.cpp
+	riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/netlist.o src/netlist.cpp
+	riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/netlist_elem.o src/netlist_elem.cpp
+	riscv64-unknown-elf-g++ -Wall -flax-vector-conversions  -c   -O2 -o  src/rng.o src/rng.cpp
+	riscv64-unknown-elf-g++ -Wall -flax-vector-conversions     -O2  -o bin/canneal_vector.exe src/*.o -lm
 	rm src/*.o
 
 runspike :

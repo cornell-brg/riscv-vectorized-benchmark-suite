@@ -6,19 +6,21 @@ LLVM := /llvm/build/
 SPIKE := spike
 PK := pk
 
+QEMU := qemu-riscv64
+
 target = bin/rvv-test
 
 serial:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2  -c  -o src/axpy.o src/axpy.c
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2  -c -o src/main.o src/main.c
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2  -c -o src/utils.o src/utils.c
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2 -o $(target) src/*.o -lm
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2  -c  -o src/axpy.o src/axpy.c
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2  -c -o src/main.o src/main.c
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2  -c -o src/utils.o src/utils.c
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2 -o $(target) src/*.o -lm
 
 vector:
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2  -c  -o src/utils.o src/utils.c
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2   -c -o src/axpy.o src/axpy.c
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2  -c -o src/main.o src/main.c
-	${GCC_RISCV}/bin/riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2    -o $(target) src/*.o -lm  
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2  -c  -o src/utils.o src/utils.c
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2   -c -o src/axpy.o src/axpy.c
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions    -O2  -c -o src/main.o src/main.c
+	riscv64-unknown-elf-gcc   -Wall -flax-vector-conversions   -O2    -o $(target) src/*.o -lm  
 	
 runspike :
 	$(SPIKE) --isa=rv64gcv $(PK) $(target) 256
